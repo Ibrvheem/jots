@@ -7,17 +7,16 @@ import { styles } from "../auth/auth.style";
 import { Image } from "react-native";
 import { api } from "../utils/api";
 import { FlatList } from "react-native-gesture-handler";
+import dayjs from "dayjs";
 
 function Home() {
-  const [notes, setNotes] = useState();
+  const [notes, setNotes] = useState([]);
   useEffect(() => {
     async function fetchNotes() {
       try {
-        const apiInstance = await api();
-        const notesResponse = await apiInstance.get("notes");
-        setNotes(notesResponse.data);
-
-        console.log("here", notesResponse.data);
+        const notesResponse = await api.get("notes");
+        setNotes(notesResponse);
+        console.log("here", notesResponse);
       } catch (error) {
         console.error("Error fetching note:", error);
       }
@@ -73,7 +72,9 @@ function Home() {
                 margin: 2,
                 width: "98%",
                 backgroundColor: colors.white,
-                shadowColor: colors.text,
+                borderWidth: 1,
+                borderColor: colors.gray,
+                shadowColor: colors.gray,
 
                 shadowOffset: {
                   width: 0,
@@ -104,7 +105,7 @@ function Home() {
                 <View>
                   <Text style={{ fontSize: 14, fontFamily: "poppinsBold", color: colors.text }}>{item.subject}</Text>
                   <Text style={{ fontSize: 16, fontFamily: "poppins", color: colors.text }}>{item.topic}</Text>
-                  <Text style={{ fontSize: 15, fontFamily: "poppinsRegular", marginTop: 10, color: colors.text }}>{item.created_at}</Text>
+                  <Text style={{ fontSize: 15, fontFamily: "poppinsRegular", marginTop: 10, color: colors.text }}>{dayjs(item.created_at).format("D, MMMM YYYY")}</Text>
                 </View>
                 <View style={{ justifyContent: "space-between", alignItems: "flex-end" }}>
                   <View

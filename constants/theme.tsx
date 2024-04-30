@@ -1,9 +1,9 @@
 const colors = {
-  primary: '#FAA300',
-  seconday: '#E57C04',
-  white: '#FEFFFE',
-  text: '#020305',
-  gray: '#E3E5F2',
+  primary: "#FAA300",
+  secondary: "#E57C04",
+  white: "#FEFFFE",
+  text: "#020305",
+  gray: "#E3E5F2",
 };
 
 const sizes = {

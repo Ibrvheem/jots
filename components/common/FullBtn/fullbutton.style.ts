@@ -6,8 +6,9 @@ export const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: colors.primary,
     height: 50,
-    borderRadius: 30,
+    borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
+    opacity: 1,
   },
 });

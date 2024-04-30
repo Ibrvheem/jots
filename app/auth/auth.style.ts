@@ -8,5 +8,5 @@ export const styles = StyleSheet.create({
     marginVertical: 50,
     alignItems: "center",
   },
-  input: { borderWidth: 1, borderColor: colors.gray, height: 50, borderRadius: 30, color: colors.text, padding: 10, marginVertical: 10, width: "100%" },
+  input: { borderWidth: 1, borderColor: colors.gray, height: 50, borderRadius: 10, color: colors.text, padding: 10, marginVertical: 10, width: "100%" },
 });

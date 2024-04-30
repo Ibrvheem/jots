@@ -1,8 +1,9 @@
 import { SplashScreen, Slot, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
-import { View } from "react-native";
+import { SafeAreaView, View } from "react-native";
 import { colors } from "../constants/theme";
+import Toast from "react-native-toast-message";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,15 +25,18 @@ export default function Layout() {
   }
 
   return (
-    <Stack
-      screenOptions={{
-        headerShadowVisible: false,
-        headerStyle: {
-          backgroundColor: colors.white,
-        },
-      }}
-    >
-      <Slot />
-    </Stack>
+    <>
+      <Stack
+        screenOptions={{
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: colors.white,
+          },
+        }}
+      >
+        <Slot />
+      </Stack>
+      <Toast />
+    </>
   );
 }

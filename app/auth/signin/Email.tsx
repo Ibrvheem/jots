@@ -1,5 +1,5 @@
 import { View, TextInput, Text } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import FullButton from "../../../components/common/FullBtn/FullButton";
 import { api } from "../../utils/api";
@@ -8,25 +8,36 @@ import { styles } from "../auth.style";
 import { colors } from "../../../constants/theme";
 import { Link, router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-toast-message";
 
 const Email = () => {
+  const [loading, setLoading] = useState(false);
   const initialValues = {
     email: "",
     password: "",
     role: "teacher",
   };
   const onSubmit = async () => {
+    setLoading(true);
     try {
-      const apiInstance = await api();
-      const createAccount = await apiInstance.post({ endpoint: "login", payload: formik.values });
-      AsyncStorage.setItem("token", createAccount?.data?.token);
-      console.log("token", createAccount?.data?.token);
-      if (createAccount?.data?.token) {
+      const login = await api.post({ endpoint: "login", payload: formik.values });
+      console.log(login);
+      if (login?.token) {
         router.push(`/home/`);
+        AsyncStorage.setItem("token", login?.token);
+        Toast.show({
+          type: "success",
+          text1: "Sign in successful",
+        });
       }
-      return createAccount;
-    } catch (err) {
-      console.error(err);
+      return login;
+    } catch (err: any) {
+      Toast.show({
+        type: "error",
+        text1: err.response.data.message,
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,7 +63,7 @@ const Email = () => {
           Sign Up
         </Link>
       </Text>
-      <FullButton handlePress={formik.handleSubmit} text={"Sign In"} />
+      <FullButton handlePress={formik.handleSubmit} text={"Sign In"} loading={loading} />
     </View>
   );
 };

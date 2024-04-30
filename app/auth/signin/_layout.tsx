@@ -10,7 +10,7 @@ import FullButton from "../../../components/common/FullBtn/FullButton";
 
 const SignInLayout = () => {
   const methods = ["Social", "Email", "Phone"];
-  const [isSelected, setIsSelected] = useState("Social");
+  const [isSelected, setIsSelected] = useState("Email");
 
   return (
     <View style={styles.auth}>
@@ -23,13 +23,14 @@ const SignInLayout = () => {
         }}
       />
       <SafeAreaView style={{ flex: 1, alignItems: "center", width: "100%" }}>
-        <Text style={{ fontSize: 30, fontFamily: "poppinsRegular" }}>Sign In to Continue</Text>
+        <Text style={{ fontSize: 30, fontFamily: "poppinsBold" }}>Sign In</Text>
         <Text style={{ fontSize: 15, fontFamily: "poppinsRegular", textAlign: "center" }}>Sign In using any of these methods</Text>
         <View style={{ flexDirection: "row", gap: 10, marginTop: 20 }}>
           {methods.map((item) => (
             <Button
               buttonText={item}
               isSelected={isSelected == item}
+              disabled={true}
               handlePress={() => {
                 setIsSelected(item);
                 router.push(`./${item}`);

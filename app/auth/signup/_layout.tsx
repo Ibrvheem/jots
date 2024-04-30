@@ -7,6 +7,7 @@ import { styles } from "../auth.style";
 import Button from "../../../components/auth/button/Button";
 import axios from "axios";
 import FullButton from "../../../components/common/FullBtn/FullButton";
+import Toast from "react-native-toast-message";
 
 const SignInLayout = () => {
   const methods = ["Social", "Email", "Phone"];
@@ -17,7 +18,14 @@ const SignInLayout = () => {
         options={{
           headerTitle: "Sign up",
           headerShadowVisible: false,
-          headerLeft: () => <IconContainer iconUrl={require("../../../assets/icons/back.png")} />,
+          headerLeft: () => (
+            <IconContainer
+              iconUrl={require("../../../assets/icons/back.png")}
+              handlePress={() => {
+                router.back();
+              }}
+            />
+          ),
           headerRight: () => <IconContainer iconUrl={require("../../../assets/icons/more.png")} />,
         }}
       />

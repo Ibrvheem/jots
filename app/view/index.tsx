@@ -1,8 +1,7 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import Markdown from "react-native-markdown-display";
 import { api } from "../utils/api";
-import axios from "axios";
 import { colors } from "../../constants/theme";
 import { Stack, router, useLocalSearchParams } from "expo-router";
 import IconContainer from "../../components/common/IconContainer/IconContainer";
@@ -10,19 +9,18 @@ import IconContainer from "../../components/common/IconContainer/IconContainer";
 const ViewNote = () => {
   const [note, setNote] = useState("");
   const { id } = useLocalSearchParams();
+  console.log("view", id);
   useEffect(() => {
+    console.log("jerrsat");
     async function fetchNote() {
       try {
-        const apiInstance = await api();
-        const notesResponse = await apiInstance.get("notes");
-        const noteResponse = await apiInstance.get(`note/${id}`);
-        let { clean } = noteResponse?.data;
-        let images = noteResponse?.data?.images;
+        const noteResponse = await api.get(`note/${id}`);
+        let clean = noteResponse?.clean;
+        let images = noteResponse?.images;
         images.map((image: { id: string; prompt: string; url: string }) => {
           clean = clean.replace(`[img:${image.id}]`, `![${image.prompt}](${image.url})`);
         });
         setNote(clean);
-        console.log("here", notesResponse);
       } catch (error) {
         console.error("Error fetching note:", error);
       }
@@ -38,7 +36,7 @@ const ViewNote = () => {
       borderRadius: 20,
     },
     text: {
-      fontFamily: "poppins",
+      fontFamily: "poppinsBold",
     },
     heading2: {
       color: colors.primary,
