@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 const url = "http://127.0.0.1:5001";
-// const url = "https://233a-197-210-76-111.ngrok-free.app";
+// const url = "https://7e8d-105-112-73-190.ngrok-free.app";
 
 export const api = {
   post: async ({ endpoint, payload }: { payload: NonNullable<unknown>; endpoint: string }) => {
